@@ -1,0 +1,32 @@
+{
+  "\$schema": "https://opencode.ai/config.json",
+  "ai": {
+    "provider": "openai",
+    "openai": {
+      "baseURL": "http://localhost:11434/v1",
+      "apiKey": "ollama",
+      "model": "qwen2.5-coder:7b"
+    }
+  },
+  "mcpServers": {
+    "duckduckgo": {
+      "command": "npx",
+      "args": ["-y", "@nickclyde/duckduckgo-mcp-server"]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-playwright"]
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "YOUR_TOKEN_HERE"
+      }
+    }
+  },
+  "projector": {
+    "terminal": true,
+    "filesystem": true
+  }
+}

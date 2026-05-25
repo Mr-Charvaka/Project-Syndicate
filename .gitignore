@@ -1,0 +1,7 @@
+.aider*
+node_modules
+keys.txt
+*.exe
+__pycache__/
+*.pyc
+*.db

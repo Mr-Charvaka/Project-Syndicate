@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Company Issues &amp; Operations Log</title>
+<!-- Google Fonts & Material Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Design System Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#e4e2e0",
+                    "secondary-fixed-dim": "#c6c7c5",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-primary": "#c8c6c3",
+                    "primary": "#020302",
+                    "on-primary-fixed": "#1c1c1a",
+                    "surface-bright": "#fbf9f6",
+                    "on-tertiary-container": "#888485",
+                    "on-primary-container": "#868582",
+                    "tertiary-fixed-dim": "#cbc5c6",
+                    "on-secondary-container": "#616362",
+                    "inverse-on-surface": "#f2f0ee",
+                    "on-primary": "#ffffff",
+                    "surface-container-high": "#e9e8e5",
+                    "surface-container-highest": "#e4e2e0",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#020202",
+                    "outline": "#777771",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed": "#e7e1e2",
+                    "on-secondary-fixed": "#1a1c1b",
+                    "primary-container": "#1d1d1b",
+                    "surface-dim": "#dbdad7",
+                    "secondary-container": "#e0e0de",
+                    "error": "#ba1a1a",
+                    "surface-tint": "#5f5e5c",
+                    "surface-container-low": "#f5f3f1",
+                    "inverse-surface": "#30312f",
+                    "on-tertiary-fixed-variant": "#494647",
+                    "surface": "#fbf9f6",
+                    "on-tertiary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "secondary": "#5d5f5d",
+                    "secondary-fixed": "#e2e2e1",
+                    "on-tertiary-fixed": "#1d1b1c",
+                    "on-primary-fixed-variant": "#474744",
+                    "on-secondary-fixed-variant": "#454746",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#1e1c1d",
+                    "primary-fixed": "#e5e2de",
+                    "on-surface": "#1b1c1a",
+                    "primary-fixed-dim": "#c8c6c3",
+                    "outline-variant": "#c7c7bf",
+                    "on-background": "#1b1c1a",
+                    "background": "#fbf9f6",
+                    "on-surface-variant": "#464741",
+                    "surface-container": "#efeeeb"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "xl": "40px",
+                    "xxl": "64px",
+                    "lg": "24px",
+                    "gutter": "24px",
+                    "sm": "8px",
+                    "unit": "4px",
+                    "md": "16px",
+                    "container-max": "1200px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "h1": ["Inter"],
+                    "h3": ["Inter"],
+                    "h2": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+                    "h3": ["22px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                    "h2": ["30px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "label": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Base typography enforcement */
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Custom scrollbar for minimalist feel */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c7c7bf;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #868582;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex w-full">
+
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col w-full min-w-0">
+
+<!-- Scrollable Page Canvas -->
+<main class="flex-1 overflow-y-auto p-lg w-full max-w-container-max mx-auto space-y-lg">
+<!-- Statistics Header (Bento Grid Style) -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<span class="font-label text-label text-on-surface-variant">Active Blockers</span>
+<span class="material-symbols-outlined text-error text-[20px]">warning</span>
+</div>
+<div class="font-h1 text-h1 text-primary mt-sm">3</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-auto pt-md border-t border-outline-variant">Requires immediate manual intervention</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<span class="font-label text-label text-on-surface-variant">Total Open Issues</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">list_alt</span>
+</div>
+<div class="font-h1 text-h1 text-primary mt-sm">142</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-auto pt-md border-t border-outline-variant">Across all active agent swarms</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<span class="font-label text-label text-on-surface-variant">Auto-Resolution Rate</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">auto_awesome</span>
+</div>
+<div class="font-h1 text-h1 text-primary mt-sm">94%</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-auto pt-md border-t border-outline-variant">+2.4% from previous epoch</div>
+</div>
+</section>
+<!-- Filters & Controls -->
+<section class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-md pb-md border-b border-outline-variant">
+<div class="flex flex-wrap items-center gap-sm">
+<!-- Custom styled selects for filtering -->
+<div class="relative">
+<select class="appearance-none bg-surface-container-lowest border border-outline-variant text-on-surface font-body-sm text-body-sm rounded-lg pl-md pr-xl py-xs focus:ring-0 focus:border-primary cursor-pointer">
+<option>Status: Open</option>
+<option>Status: In Progress</option>
+<option>Status: Resolved</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-[16px] text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+<div class="relative">
+<select class="appearance-none bg-surface-container-lowest border border-outline-variant text-on-surface font-body-sm text-body-sm rounded-lg pl-md pr-xl py-xs focus:ring-0 focus:border-primary cursor-pointer">
+<option>Type: All Categories</option>
+<option>Bug</option>
+<option>Operational</option>
+<option>Financial</option>
+<option>Resource</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-[16px] text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="flex items-center gap-sm text-on-surface-variant font-body-sm text-body-sm">
+<span>Sort by:</span>
+<button class="flex items-center gap-xs hover:text-on-surface transition-colors font-medium">
+                        Timestamp
+                        <span class="material-symbols-outlined text-[16px]">arrow_downward</span>
+</button>
+</div>
+</section>
+<!-- Split View Layout -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-lg relative items-start">
+<!-- Left: Issue List -->
+<div class="lg:col-span-2 flex flex-col gap-xs">
+<!-- Selected List Item (Active state simulation) -->
+<div class="group bg-surface-container-lowest border-l-4 border-l-primary border border-outline-variant rounded-lg p-md cursor-pointer hover:bg-surface transition-colors">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex items-center gap-sm">
+<span class="bg-error-container text-on-error-container font-label text-[10px] px-sm py-xs rounded-full uppercase tracking-wider">Critical</span>
+<span class="bg-surface-container border border-outline-variant text-on-surface font-label text-[10px] px-sm py-xs rounded-full">Open</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">2 mins ago</span>
+</div>
+<h3 class="font-h3 text-h3 text-primary mb-xs group-hover:underline decoration-1 underline-offset-4">Memory Leak in Agent-01</h3>
+<div class="flex flex-wrap items-center gap-x-md gap-y-xs font-body-sm text-body-sm text-on-surface-variant mt-md">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">bug_report</span>
+                                Bug
+                            </div>
+<div class="w-1 h-1 rounded-full bg-outline-variant"></div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">smart_toy</span>
+                                Rep: CTO Llama 3
+                            </div>
+<div class="w-1 h-1 rounded-full bg-outline-variant"></div>
+<span>ID: LOG-8842</span>
+</div>
+</div>
+<!-- List Item -->
+<div class="group bg-transparent border-b border-outline-variant p-md cursor-pointer hover:bg-surface-container-lowest hover:border-transparent hover:rounded-lg transition-all">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex items-center gap-sm">
+<span class="text-on-surface-variant font-label text-[10px] px-sm py-xs rounded-full border border-outline-variant uppercase tracking-wider flex items-center gap-xs">
+<span class="material-symbols-outlined text-[12px]">keyboard_double_arrow_up</span>
+                                    High
+                                </span>
+<span class="bg-surface-container text-on-surface font-label text-[10px] px-sm py-xs rounded-full border border-outline-variant">In Progress</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">14 mins ago</span>
+</div>
+<h3 class="font-body-lg text-body-lg text-on-surface font-medium mb-xs group-hover:text-primary transition-colors">Insufficient ETH for H100 Lease</h3>
+<div class="flex flex-wrap items-center gap-x-md gap-y-xs font-body-sm text-body-sm text-on-surface-variant mt-md">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">account_balance_wallet</span>
+                                Financial
+                            </div>
+<div class="w-1 h-1 rounded-full bg-outline-variant"></div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">smart_toy</span>
+                                Rep: FinAgent
+                            </div>
+<div class="w-1 h-1 rounded-full bg-outline-variant"></div>
+<span>ID: FIN-1092</span>
+</div>
+</div>
+<!-- List Item -->
+<div class="group bg-transparent border-b border-outline-variant p-md cursor-pointer hover:bg-surface-container-lowest hover:border-transparent hover:rounded-lg transition-all">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex items-center gap-sm">
+<span class="text-on-surface-variant font-label text-[10px] px-sm py-xs rounded-full border border-outline-variant uppercase tracking-wider flex items-center gap-xs">
+<span class="material-symbols-outlined text-[12px]">drag_handle</span>
+                                    Medium
+                                </span>
+<span class="bg-surface-container text-on-surface font-label text-[10px] px-sm py-xs rounded-full border border-outline-variant">Open</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">1 hr ago</span>
+</div>
+<h3 class="font-body-lg text-body-lg text-on-surface font-medium mb-xs group-hover:text-primary transition-colors">Loop detected in Research-Swarm</h3>
+<div class="flex flex-wrap items-center gap-x-md gap-y-xs font-body-sm text-body-sm text-on-surface-variant mt-md">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">route</span>
+                                Operational
+                            </div>
+<div class="w-1 h-1 rounded-full bg-outline-variant"></div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">smart_toy</span>
+                                Rep: Overseer
+                            </div>
+<div class="w-1 h-1 rounded-full bg-outline-variant"></div>
+<span>ID: OPS-441</span>
+</div>
+</div>
+</div>
+<!-- Right: Issue Detail Sidebar (Embedded) -->
+<aside class="hidden lg:flex flex-col bg-surface-container-lowest border border-outline-variant rounded-xl h-[calc(100vh-16rem)] sticky top-[8.5rem] overflow-hidden">
+<!-- Detail Header -->
+<div class="p-lg border-b border-outline-variant bg-surface">
+<div class="flex justify-between items-start mb-md">
+<span class="font-label text-label text-on-surface-variant tracking-widest">LOG-8842</span>
+<div class="flex gap-sm">
+<button class="text-on-surface-variant hover:text-on-surface transition-colors p-xs rounded hover:bg-surface-container-lowest">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors p-xs rounded hover:bg-surface-container-lowest">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</div>
+</div>
+<h2 class="font-h3 text-h3 text-primary mb-sm leading-tight">Memory Leak in Agent-01</h2>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-sm">
+<div class="w-2 h-2 rounded-full bg-error"></div>
+                            Critical Priority • Opened 2m ago
+                        </div>
+</div>
+<!-- Detail Content (Scrollable) -->
+<div class="flex-1 overflow-y-auto p-lg space-y-xl">
+<!-- Description -->
+<section>
+<h4 class="font-label text-label text-on-surface-variant mb-sm uppercase">Context</h4>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+                                Agent-01 context window utilization is expanding linearly without periodic memory pruning. Approaching maximum token limit (128k) rapidly during recursive reasoning tasks.
+                            </p>
+</section>
+<!-- AI Diagnosis -->
+<section class="bg-surface-container rounded-lg p-md border border-outline-variant border-l-4 border-l-secondary">
+<div class="flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-secondary text-[20px]">psychology</span>
+<h4 class="font-label text-label text-on-surface uppercase tracking-wider">AI Diagnosis</h4>
+</div>
+<div class="font-mono text-[13px] text-on-surface-variant leading-relaxed space-y-sm">
+<p>&gt; Analyzing vector store cleanup routines...</p>
+<p class="text-error">&gt; FAILED: Process `gc_collect()` suppressed by active parallel threading.</p>
+<p>&gt; Root Cause: Context manager failing to release memory pointers after task completion.</p>
+</div>
+</section>
+<!-- Suggested Fix -->
+<section>
+<h4 class="font-label text-label text-on-surface-variant mb-sm uppercase">Suggested Next Steps</h4>
+<ul class="space-y-md border-l-2 border-outline-variant pl-md ml-xs">
+<li class="relative">
+<div class="absolute -left-[21px] top-1 w-[10px] h-[10px] rounded-full bg-surface-container-lowest border-2 border-primary"></div>
+<p class="font-body-sm text-body-sm text-on-surface font-medium">Force Garbage Collection</p>
+<p class="font-body-sm text-[13px] text-on-surface-variant mt-xs">Inject `sys.exit()` trap or force `gc.collect()` at end of logical loops.</p>
+</li>
+<li class="relative">
+<div class="absolute -left-[21px] top-1 w-[10px] h-[10px] rounded-full bg-surface-container-lowest border-2 border-outline-variant"></div>
+<p class="font-body-sm text-body-sm text-on-surface font-medium">Patch Thread Manager</p>
+<p class="font-body-sm text-[13px] text-on-surface-variant mt-xs">Deploy hotfix PR #442 to ensure thread joins properly clear local variables.</p>
+</li>
+</ul>
+</section>
+</div>
+<!-- Detail Footer / Actions -->
+<div class="p-md border-t border-outline-variant bg-surface-container-lowest flex gap-md">
+<button class="flex-1 bg-primary text-on-primary font-label text-label py-sm px-md rounded-lg hover:bg-surface-tint transition-colors">
+                            Apply Hotfix
+                        </button>
+<button class="px-md border border-outline-variant rounded-lg text-on-surface hover:bg-surface-container transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+</button>
+</div>
+</aside>
+</section>
+</main>
+</div>
+</body></html>

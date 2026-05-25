@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Serene Logic OS - Central Intelligence</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        body { font-family: 'Inter', sans-serif; transition: all 0.3s ease; }
+        .view-frame { position: fixed; top: 0; left: 256px; width: calc(100% - 256px); height: 100vh; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); background: white; }
+        .view-hidden { transform: translateX(100%); visibility: hidden; }
+        .view-active { transform: translateX(0); visibility: visible; z-index: 10; }
+        .sidebar-item-active { background: #efeeeb; font-weight: 600; color: #1b1c1a; }
+        
+        /* Collapsed Sidebar State */
+        body.sidebar-collapsed #sidebar { width: 80px !important; padding: 1.5rem 0.75rem !important; }
+        body.sidebar-collapsed .nav-text, body.sidebar-collapsed .logo-text, body.sidebar-collapsed .logo-subtext { display: none; }
+        body.sidebar-collapsed .view-frame { left: 80px; width: calc(100% - 80px); }
+        body.sidebar-collapsed main { margin-left: 80px; }
+        body.sidebar-collapsed .sidebar-item { justify-content: center; px: 0; }
+        
+        /* Glassmorphism effects */
+        .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(232, 232, 230, 0.5); }
+    </style>
+</head>
+<body class="bg-[#fbf9f6] text-[#1b1c1a] antialiased overflow-hidden">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="fixed left-0 top-0 h-full w-64 border-r border-[#E8E8E6] bg-white p-6 flex flex-col gap-8 z-50 transition-all duration-300">
+        <div class="flex items-start justify-between">
+            <div class="flex flex-col gap-1 overflow-hidden">
+                <h1 class="text-xl font-bold tracking-tighter text-[#1D1D1B] logo-text">Serene Logic</h1>
+                <p class="font-label text-[10px] uppercase tracking-widest text-[#464741] opacity-60 logo-subtext">Central Intelligence</p>
+            </div>
+            <button onclick="toggleSidebar()" class="p-1 hover:bg-gray-100 rounded-md transition-colors">
+                <span class="material-symbols-outlined text-gray-400">menu_open</span>
+            </button>
+        </div>
+        
+        <div class="flex-1 flex flex-col gap-1 overflow-y-auto custom-scrollbar">
+            <button onclick="showView('dashboard')" id="nav-dashboard" class="sidebar-item sidebar-item-active flex items-center gap-3 px-3 py-2 rounded-lg transition-all text-sm">
+                <span class="material-symbols-outlined text-[20px]">dashboard</span>
+                <span class="nav-text">Dashboard</span>
+            </button>
+            <button onclick="showView('boardroom')" id="nav-boardroom" class="sidebar-item flex items-center gap-3 px-3 py-2 rounded-lg transition-all text-sm text-[#464741] hover:bg-[#efeeeb]">
+                <span class="material-symbols-outlined text-[20px]">forum</span>
+                <span class="nav-text">Boardroom</span>
+            </button>
+            <button onclick="showView('code')" id="nav-code" class="sidebar-item flex items-center gap-3 px-3 py-2 rounded-lg transition-all text-sm text-[#464741] hover:bg-[#efeeeb]">
+                <span class="material-symbols-outlined text-[20px]">code</span>
+                <span class="nav-text">Code Editor</span>
+            </button>
+            <button onclick="showView('personnel')" id="nav-personnel" class="sidebar-item flex items-center gap-3 px-3 py-2 rounded-lg transition-all text-sm text-[#464741] hover:bg-[#efeeeb]">
+                <span class="material-symbols-outlined text-[20px]">group</span>
+                <span class="nav-text">Personnel</span>
+            </button>
+            <button onclick="showView('issues')" id="nav-issues" class="sidebar-item flex items-center gap-3 px-3 py-2 rounded-lg transition-all text-sm text-[#464741] hover:bg-[#efeeeb]">
+                <span class="material-symbols-outlined text-[20px]">bug_report</span>
+                <span class="nav-text">Issue Logs</span>
+            </button>
+            <button onclick="showView('browser')" id="nav-browser" class="sidebar-item flex items-center gap-3 px-3 py-2 rounded-lg transition-all text-sm text-[#464741] hover:bg-[#efeeeb]">
+                <span class="material-symbols-outlined text-[20px]">language</span>
+                <span class="nav-text">Agent Browser</span>
+            </button>
+            <button onclick="showView('wallet')" id="nav-wallet" class="sidebar-item flex items-center gap-3 px-3 py-2 rounded-lg transition-all text-sm text-[#464741] hover:bg-[#efeeeb]">
+                <span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+                <span class="nav-text">Wallet</span>
+            </button>
+            <button onclick="showView('email')" id="nav-email" class="sidebar-item flex items-center gap-3 px-3 py-2 rounded-lg transition-all text-sm text-[#464741] hover:bg-[#efeeeb]">
+                <span class="material-symbols-outlined text-[20px]">mail</span>
+                <span class="nav-text">Email</span>
+            </button>
+            <button onclick="showView('automations')" id="nav-automations" class="sidebar-item flex items-center gap-3 px-3 py-2 rounded-lg transition-all text-sm text-[#464741] hover:bg-[#efeeeb]">
+                <span class="material-symbols-outlined text-[20px]">hub</span>
+                <span class="nav-text">Automations</span>
+            </button>
+            <button onclick="showView('social')" id="nav-social" class="sidebar-item flex items-center gap-3 px-3 py-2 rounded-lg transition-all text-sm text-[#464741] hover:bg-[#efeeeb]">
+                <span class="material-symbols-outlined text-[20px]">public</span>
+                <span class="nav-text">Social Media</span>
+            </button>
+        </div>
+        
+        <div class="pt-6 border-t border-[#E8E8E6]">
+            <button class="sidebar-item flex items-center gap-3 px-3 py-2 text-[#464741] hover:text-[#1b1c1a] transition-colors text-sm">
+                <span class="material-symbols-outlined text-[20px]">settings</span>
+                <span class="nav-text">Settings</span>
+            </button>
+            <button onclick="showView('support')" id="nav-support" class="sidebar-item flex items-center gap-3 px-3 py-2 text-[#464741] hover:text-[#1b1c1a] transition-colors text-sm">
+                <span class="material-symbols-outlined text-[20px]">help</span>
+                <span class="nav-text">Support</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="ml-64 h-full relative">
+        <!-- Dashboard View -->
+        <iframe id="view-dashboard" class="view-frame view-active border-none" src="Dashboard.html" data-loaded="true"></iframe>
+
+        <!-- Boardroom View (Iframe) -->
+        <iframe id="view-boardroom" class="view-frame view-hidden border-none" src="BoardRoom.html?shell=true" data-loaded="false"></iframe>
+
+        <!-- Code Editor View (Iframe) -->
+        <iframe id="view-code" class="view-frame view-hidden border-none" src="Code_editor.html?shell=true" data-loaded="false"></iframe>
+
+        <!-- Personnel View -->
+        <iframe id="view-personnel" class="view-frame view-hidden border-none" src="Personnel.html" data-loaded="false"></iframe>
+
+        <!-- Issues View -->
+        <iframe id="view-issues" class="view-frame view-hidden border-none" src="Issues%20Logs.html" data-loaded="false"></iframe>
+
+        <!-- Browser View (Mapped to Agentic_browser.html) -->
+        <iframe id="view-browser" class="view-frame view-hidden border-none" src="Agentic_browser.html" data-loaded="false"></iframe>
+
+
+
+        <!-- Wallet View -->
+        <iframe id="view-wallet" class="view-frame view-hidden border-none" src="Wallet.html" data-loaded="false"></iframe>
+
+        <!-- Email View -->
+        <iframe id="view-email" class="view-frame view-hidden border-none" src="Email.html" data-loaded="false"></iframe>
+
+        <!-- Automations View -->
+        <iframe id="view-automations" class="view-frame view-hidden border-none" src="Automations.html" data-loaded="false"></iframe>
+
+        <!-- Social View -->
+        <iframe id="view-social" class="view-frame view-hidden border-none" src="Social_Media.html" data-loaded="false"></iframe>
+
+        <!-- Customercare View -->
+        <iframe id="view-support" class="view-frame view-hidden border-none" src="Agentic_Customer_Care.html" data-loaded="false"></iframe>
+    </main>
+    <script>
+        const views = ['dashboard', 'boardroom', 'code', 'personnel', 'issues', 'browser', 'wallet', 'email', 'automations', 'social', 'support'];
+        
+        function showView(targetId) {
+            views.forEach(v => {
+                const el = document.getElementById('view-' + v);
+                const nav = document.getElementById('nav-' + v);
+                if (!el) return;
+
+                if (v === targetId) {
+                    el.classList.remove('view-hidden');
+                    el.classList.add('view-active');
+                    if (nav) nav.classList.add('sidebar-item-active');
+                    
+                    // Lazy load iframes
+                    if (el.tagName === 'IFRAME' && el.getAttribute('data-loaded') === 'false') {
+                        el.setAttribute('data-loaded', 'true');
+                        // Ensure src is set to trigger load
+                        const currentSrc = el.getAttribute('src');
+                        el.src = '';
+                        el.src = currentSrc;
+                    }
+                } else {
+                    el.classList.remove('view-active');
+                    el.classList.add('view-hidden');
+                    if (nav) nav.classList.remove('sidebar-item-active');
+                }
+            });
+        }
+        
+        function toggleSidebar() {
+            document.body.classList.toggle('sidebar-collapsed');
+            const icon = document.querySelector('[onclick="toggleSidebar()"] span');
+            if (document.body.classList.contains('sidebar-collapsed')) {
+                icon.innerText = 'menu';
+            } else {
+                icon.innerText = 'menu_open';
+            }
+        }
+
+        async function selectSyndicateWorkspace() {
+            try {
+                const path = await window.electron.ipcRenderer.invoke('select-workspace');
+                if (path) {
+                    document.getElementById('current-path-text').innerText = path;
+                    document.getElementById('current-path-text').classList.replace('text-gray-400', 'text-black');
+                    
+                    // Log to activity feed
+                    const feed = document.getElementById('activity-feed');
+                    const entry = document.createElement('div');
+                    entry.className = "flex gap-4 items-start p-4 bg-green-50 rounded-xl border border-green-100";
+                    entry.innerHTML = `
+                        <div class="w-2 h-2 rounded-full bg-green-500 mt-1.5"></div>
+                        <div>
+                            <p class="text-sm font-medium">Workspace Secured</p>
+                            <p class="text-xs text-green-700">Agents are now locked into: ${path}</p>
+                        </div>
+                    `;
+                    feed.prepend(entry);
+                }
+            } catch (err) {
+                console.error("Workspace selection error:", err);
+            }
+        }
+
+        // Syndicate Orchestrator Listeners
+        window.electron.ipcRenderer.on('switch-view', (event, tabKey) => {
+            console.log("Global View Switch Triggered:", tabKey);
+            showView(tabKey);
+        });
+    </script>
+</body>
+</html>

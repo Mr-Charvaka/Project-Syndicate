@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AutonomousAI - Org Chart</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface-variant": "#464741",
+                      "primary-container": "#1d1d1b",
+                      "error": "#ba1a1a",
+                      "on-secondary-fixed": "#1a1c1b",
+                      "on-error-container": "#93000a",
+                      "tertiary-container": "#1e1c1d",
+                      "on-tertiary-fixed-variant": "#494647",
+                      "surface-tint": "#5f5e5c",
+                      "background": "#fbf9f6",
+                      "surface-dim": "#dbdad7",
+                      "surface-bright": "#fbf9f6",
+                      "on-tertiary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "inverse-on-surface": "#f2f0ee",
+                      "on-tertiary-container": "#888485",
+                      "on-secondary-container": "#616362",
+                      "surface-container": "#efeeeb",
+                      "on-background": "#1b1c1a",
+                      "on-primary-fixed-variant": "#474744",
+                      "inverse-surface": "#30312f",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-fixed": "#e2e2e1",
+                      "surface-container-high": "#e9e8e5",
+                      "on-secondary": "#ffffff",
+                      "tertiary": "#020202",
+                      "surface": "#fbf9f6",
+                      "tertiary-fixed": "#e7e1e2",
+                      "on-primary": "#ffffff",
+                      "inverse-primary": "#c8c6c3",
+                      "outline": "#777771",
+                      "on-surface": "#1b1c1a",
+                      "primary-fixed": "#e5e2de",
+                      "secondary-container": "#e0e0de",
+                      "error-container": "#ffdad6",
+                      "on-secondary-fixed-variant": "#454746",
+                      "on-primary-fixed": "#1c1c1a",
+                      "surface-container-low": "#f5f3f1",
+                      "primary-fixed-dim": "#c8c6c3",
+                      "surface-variant": "#e4e2e0",
+                      "on-tertiary-fixed": "#1d1b1c",
+                      "secondary": "#5d5f5d",
+                      "surface-container-highest": "#e4e2e0",
+                      "primary": "#020302",
+                      "tertiary-fixed-dim": "#cbc5c6",
+                      "outline-variant": "#c7c7bf",
+                      "on-primary-container": "#868582",
+                      "secondary-fixed-dim": "#c6c7c5"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "lg": "24px",
+                      "sm": "8px",
+                      "xxl": "64px",
+                      "gutter": "24px",
+                      "md": "16px",
+                      "xl": "40px",
+                      "unit": "4px",
+                      "xs": "4px",
+                      "container-max": "1200px"
+              },
+              "fontFamily": {
+                      "h3": ["Inter"],
+                      "h2": ["Inter"],
+                      "h1": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "label": ["Inter"]
+              },
+              "fontSize": {
+                      "h3": ["22px", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                      "h2": ["30px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                      "h1": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "500" }],
+                      "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                      "body-md": ["16px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                      "body-sm": ["14px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }],
+                      "label": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .canvas-bg {
+            background-image: radial-gradient(#e4e2e0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .node-shadow {
+            box-shadow: 0 10px 30px rgba(29, 29, 27, 0.04);
+        }
+        
+        /* Flow Lines connecting nodes */
+        .flow-line-vertical {
+            position: absolute;
+            width: 1px;
+            background-color: #E8E8E6;
+            z-index: 0;
+        }
+        .flow-line-horizontal {
+            position: absolute;
+            height: 1px;
+            background-color: #E8E8E6;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background h-full font-body-md overflow-hidden flex">
+
+<!-- Main Content Area -->
+<main class="flex-1 h-full flex flex-col relative">
+<!-- TopAppBar (Contextual Header for Canvas) -->
+<header class="bg-surface-container-lowest/80 backdrop-blur-md border-b border-outline-variant h-14 flex items-center justify-between px-6 z-40 shrink-0">
+<div class="flex items-center gap-4">
+<h2 class="font-h3 text-h3 text-on-surface">Hierarchy Builder</h2>
+<span class="bg-surface-container px-2 py-1 rounded text-on-surface-variant font-label text-label">Draft Mode</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center border border-outline-variant rounded-lg overflow-hidden bg-surface-container-lowest">
+<button class="p-1.5 hover:bg-surface-container text-on-surface-variant border-r border-outline-variant" title="Zoom Out">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<span class="px-3 font-label text-label text-on-surface">100%</span>
+<button class="p-1.5 hover:bg-surface-container text-on-surface-variant border-l border-outline-variant" title="Zoom In">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<button class="flex items-center gap-2 border border-outline-variant bg-surface-container-lowest text-on-surface font-label text-label px-4 py-1.5 rounded-lg hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[16px]">save</span>
+                    Save Draft
+                </button>
+<button class="flex items-center gap-2 bg-primary text-on-primary font-label text-label px-4 py-1.5 rounded-lg hover:bg-surface-tint transition-colors">
+<span class="material-symbols-outlined text-[16px]">publish</span>
+                    Publish Changes
+                </button>
+</div>
+</header>
+<!-- Canvas Area -->
+<div class="flex-1 overflow-auto canvas-bg relative p-8">
+<!-- Connection Lines (Visual Mockup) -->
+<!-- CEO to CTO/CFO -->
+<div class="flow-line-vertical top-[180px] left-1/2 h-[40px] -translate-x-1/2"></div>
+<div class="flow-line-horizontal top-[220px] left-[30%] right-[30%]"></div>
+<div class="flow-line-vertical top-[220px] left-[30%] h-[40px]"></div>
+<div class="flow-line-vertical top-[220px] left-[70%] h-[40px]"></div>
+<!-- CTO to Dev/Design -->
+<div class="flow-line-vertical top-[420px] left-[30%] h-[40px]"></div>
+<div class="flow-line-horizontal top-[460px] left-[15%] right-[45%]"></div>
+<div class="flow-line-vertical top-[460px] left-[15%] h-[40px]"></div>
+<div class="flow-line-vertical top-[460px] left-[45%] h-[40px]"></div>
+<!-- CFO to Analysis -->
+<div class="flow-line-vertical top-[420px] left-[70%] h-[80px]"></div>
+<!-- Node Canvas Container -->
+<div class="w-full max-w-[1000px] mx-auto relative min-h-[800px]">
+<!-- CEO Node -->
+<div class="absolute left-1/2 top-[40px] -translate-x-1/2 w-[320px] bg-surface-container-lowest border border-outline-variant rounded-xl node-shadow p-5 z-10 cursor-grab active:cursor-grabbing hover:border-on-surface-variant transition-colors">
+<div class="flex items-start justify-between mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
+<span class="material-symbols-outlined" data-weight="fill">shield_person</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-on-surface text-[18px]">CEO Agent</h3>
+<p class="font-label text-label text-on-surface-variant">Strategic Oversight</p>
+</div>
+</div>
+<span class="flex h-2 w-2 rounded-full bg-emerald-500 mt-1"></span>
+</div>
+<div class="bg-surface-container rounded-lg p-3 border border-outline-variant">
+<p class="font-label text-label text-on-surface-variant mb-1">CURRENT TASK</p>
+<p class="font-body-sm text-body-sm text-on-surface line-clamp-2">Evaluating Q3 resource allocation and generating quarterly directive brief.</p>
+</div>
+<!-- Node Ports -->
+<div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-surface-container-lowest border border-outline-variant rounded-full hover:bg-primary-container hover:border-primary-container transition-colors cursor-crosshair"></div>
+</div>
+<!-- CTO Node -->
+<div class="absolute left-[30%] top-[260px] -translate-x-1/2 w-[280px] bg-surface-container-lowest border border-outline-variant rounded-xl node-shadow p-4 z-10 cursor-grab active:cursor-grabbing hover:border-on-surface-variant transition-colors">
+<div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-surface-container-lowest border border-outline-variant rounded-full"></div>
+<div class="flex items-start justify-between mb-3">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[18px]" data-weight="fill">memory</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-on-surface text-[16px]">CTO Agent</h3>
+<p class="font-label text-label text-on-surface-variant">Technical Lead</p>
+</div>
+</div>
+<span class="flex h-2 w-2 rounded-full bg-emerald-500 mt-1"></span>
+</div>
+<div class="bg-surface-container rounded-lg p-2.5 border border-outline-variant">
+<p class="font-body-sm text-body-sm text-on-surface text-[13px] line-clamp-1">Reviewing PR #402</p>
+</div>
+<div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-surface-container-lowest border border-outline-variant rounded-full hover:bg-primary-container hover:border-primary-container transition-colors cursor-crosshair"></div>
+</div>
+<!-- CFO Node -->
+<div class="absolute left-[70%] top-[260px] -translate-x-1/2 w-[280px] bg-surface-container-lowest border border-outline-variant rounded-xl node-shadow p-4 z-10 cursor-grab active:cursor-grabbing hover:border-on-surface-variant transition-colors">
+<div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-surface-container-lowest border border-outline-variant rounded-full"></div>
+<div class="flex items-start justify-between mb-3">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[18px]" data-weight="fill">account_balance</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-on-surface text-[16px]">CFO Agent</h3>
+<p class="font-label text-label text-on-surface-variant">Financial Analyst</p>
+</div>
+</div>
+<span class="flex h-2 w-2 rounded-full bg-amber-500 mt-1" title="Idle"></span>
+</div>
+<div class="bg-surface-container rounded-lg p-2.5 border border-outline-variant">
+<p class="font-body-sm text-body-sm text-on-surface-variant text-[13px] italic line-clamp-1">Awaiting input data</p>
+</div>
+<div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-surface-container-lowest border border-outline-variant rounded-full hover:bg-primary-container hover:border-primary-container transition-colors cursor-crosshair"></div>
+</div>
+<!-- Dev Node -->
+<div class="absolute left-[15%] top-[500px] -translate-x-1/2 w-[240px] bg-surface-container-lowest border border-outline-variant rounded-xl node-shadow p-3 z-10 cursor-grab active:cursor-grabbing hover:border-on-surface-variant transition-colors opacity-90">
+<div class="absolute -top-2 left-1/2 -translate-x-1/2 w-3 h-3 bg-surface-container-lowest border border-outline-variant rounded-full"></div>
+<div class="flex items-center gap-2 mb-2">
+<div class="w-6 h-6 rounded bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">code</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-on-surface text-[14px]">Dev Agent Alpha</h3>
+</div>
+</div>
+<div class="bg-surface-container rounded p-2 border border-outline-variant">
+<p class="font-body-sm text-body-sm text-on-surface text-[12px] line-clamp-1">Writing tests for API</p>
+</div>
+</div>
+<!-- Design Node -->
+<div class="absolute left-[45%] top-[500px] -translate-x-1/2 w-[240px] bg-surface-container-lowest border border-outline-variant rounded-xl node-shadow p-3 z-10 cursor-grab active:cursor-grabbing hover:border-on-surface-variant transition-colors opacity-90">
+<div class="absolute -top-2 left-1/2 -translate-x-1/2 w-3 h-3 bg-surface-container-lowest border border-outline-variant rounded-full"></div>
+<div class="flex items-center gap-2 mb-2">
+<div class="w-6 h-6 rounded bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">brush</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-on-surface text-[14px]">UX Agent</h3>
+</div>
+</div>
+<div class="bg-surface-container rounded p-2 border border-outline-variant">
+<p class="font-body-sm text-body-sm text-on-surface text-[12px] line-clamp-1">Generating mockups</p>
+</div>
+</div>
+<!-- Analyst Node -->
+<div class="absolute left-[70%] top-[500px] -translate-x-1/2 w-[240px] bg-surface-container-lowest border border-outline-variant rounded-xl node-shadow p-3 z-10 cursor-grab active:cursor-grabbing hover:border-on-surface-variant transition-colors opacity-90">
+<div class="absolute -top-2 left-1/2 -translate-x-1/2 w-3 h-3 bg-surface-container-lowest border border-outline-variant rounded-full"></div>
+<div class="flex items-center gap-2 mb-2">
+<div class="w-6 h-6 rounded bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">monitoring</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-on-surface text-[14px]">Data Analyst</h3>
+</div>
+</div>
+<div class="bg-surface-container rounded p-2 border border-outline-variant">
+<p class="font-body-sm text-body-sm text-on-surface text-[12px] line-clamp-1">Parsing Q2 ledger</p>
+</div>
+</div>
+</div>
+<!-- Floating Tool Palette -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-surface-container-lowest border border-outline-variant rounded-xl shadow-[0_10px_30px_rgba(29,29,27,0.08)] flex p-1.5 gap-1 z-50">
+<button class="p-2 rounded-lg bg-surface-container text-on-surface hover:bg-surface-variant transition-colors" title="Select Tool">
+<span class="material-symbols-outlined">near_me</span>
+</button>
+<div class="w-[1px] bg-outline-variant my-1 mx-1"></div>
+<button class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" title="Add Agent Node">
+<span class="material-symbols-outlined">person_add</span>
+</button>
+<button class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" title="Add Connection">
+<span class="material-symbols-outlined">account_tree</span>
+</button>
+<button class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" title="Add Note">
+<span class="material-symbols-outlined">sticky_note_2</span>
+</button>
+</div>
+</div>
+</main>
+</body></html>

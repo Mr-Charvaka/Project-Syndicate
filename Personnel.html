@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Personnel Directory - Serene Logic</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#fbf9f6",
+                        "on-primary": "#ffffff",
+                        "primary": "#020302",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#474744",
+                        "inverse-primary": "#c8c6c3",
+                        "secondary-fixed": "#e2e2e1",
+                        "secondary": "#5d5f5d",
+                        "inverse-on-surface": "#f2f0ee",
+                        "secondary-fixed-dim": "#c6c7c5",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#464741",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#868582",
+                        "surface-container-low": "#f5f3f1",
+                        "surface-container-high": "#e9e8e5",
+                        "surface-container-highest": "#e4e2e0",
+                        "on-tertiary-container": "#888485",
+                        "background": "#fbf9f6",
+                        "on-secondary-container": "#616362",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#020202",
+                        "tertiary-fixed": "#e7e1e2",
+                        "surface": "#fbf9f6",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed": "#1d1b1c",
+                        "outline-variant": "#c7c7bf",
+                        "outline": "#777771",
+                        "on-primary-fixed": "#1c1c1a",
+                        "tertiary-container": "#1e1c1d",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed-dim": "#cbc5c6",
+                        "on-surface": "#1b1c1a",
+                        "primary-container": "#1d1d1b",
+                        "inverse-surface": "#30312f",
+                        "on-secondary-fixed": "#1a1c1b",
+                        "primary-fixed": "#e5e2de",
+                        "on-background": "#1b1c1a",
+                        "on-tertiary-fixed-variant": "#494647",
+                        "surface-dim": "#dbdad7",
+                        "primary-fixed-dim": "#c8c6c3",
+                        "surface-container": "#efeeeb",
+                        "surface-tint": "#5f5e5c",
+                        "on-secondary-fixed-variant": "#454746",
+                        "surface-variant": "#e4e2e0",
+                        "secondary-container": "#e0e0de"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "container-max": "1200px",
+                        "unit": "4px",
+                        "gutter": "24px",
+                        "xxl": "64px",
+                        "xl": "40px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h2": ["Inter"],
+                        "h1": ["Inter"],
+                        "h3": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "h2": ["30px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "h1": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "500" }],
+                        "h3": ["22px", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }],
+                        "label": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface-bright text-on-surface antialiased font-body-md text-body-md overflow-hidden">
+
+
+<!-- Main Canvas -->
+<main class="flex h-[calc(100vh-4rem)] bg-background">
+<!-- Left Pane: Agent Grid (Master View) -->
+<section class="w-1/2 lg:w-7/12 border-r border-outline-variant overflow-y-auto p-gutter bg-surface-container-low">
+<div class="flex justify-between items-end mb-lg">
+<div>
+<h2 class="font-h3 text-h3 text-on-surface">Active Roster</h2>
+<p class="font-body-sm text-body-sm text-secondary mt-xs">7 operational entities online</p>
+</div>
+<div class="flex gap-sm">
+<button class="font-label text-label px-sm py-xs border border-outline-variant rounded-DEFAULT bg-surface-container-lowest text-on-surface hover:bg-surface transition-colors">Sort: Capacity</button>
+<button class="font-label text-label px-sm py-xs border border-outline-variant rounded-DEFAULT bg-surface-container-lowest text-on-surface hover:bg-surface transition-colors">Filter</button>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-md">
+<!-- Agent Card: CTO (Active State) -->
+<article onclick="selectAgent('CTO')" id="card-CTO" class="bg-surface-container-lowest border border-primary rounded-lg p-md cursor-pointer transition-colors shadow-[0_10px_30px_rgba(29,29,27,0.04)] relative overflow-hidden">
+<div class="absolute top-0 right-0 w-16 h-16 bg-surface-container-highest rounded-bl-full -mr-8 -mt-8 opacity-50"></div>
+<div class="flex items-center justify-between mb-md relative z-10">
+<div class="w-10 h-10 rounded-full bg-surface border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">memory</span>
+</div>
+<span class="font-label text-label px-sm py-xs bg-surface-variant text-on-surface-variant rounded-DEFAULT">99.8% EFF</span>
+</div>
+<h3 class="font-body-lg text-body-lg font-semibold text-on-surface mb-xs relative z-10">Chief Technology Officer</h3>
+<div class="flex gap-sm mb-lg relative z-10">
+<span class="font-label text-label text-secondary agent-model">Llama-3.2-70b</span>
+<span class="text-outline-variant">•</span>
+<span class="font-label text-label text-secondary">0.05 ETH/h</span>
+</div>
+<div class="border-t border-outline-variant pt-sm relative z-10">
+<p class="font-label text-label text-outline mb-xs uppercase">Current Focus</p>
+<p class="font-body-sm text-body-sm text-on-surface truncate">AGI Framework Integration v2.4</p>
+</div>
+</article>
+<!-- Agent Card: CFO -->
+<article onclick="selectAgent('CFO')" id="card-CFO" class="bg-surface-container-lowest border border-outline-variant hover:border-outline rounded-lg p-md cursor-pointer transition-colors">
+<div class="flex items-center justify-between mb-md">
+<div class="w-10 h-10 rounded-full bg-surface border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">account_balance</span>
+</div>
+<span class="font-label text-label px-sm py-xs bg-surface text-on-surface-variant rounded-DEFAULT border border-outline-variant">99.1% EFF</span>
+</div>
+<h3 class="font-body-lg text-body-lg font-semibold text-on-surface mb-xs">Chief Financial Officer</h3>
+<div class="flex gap-sm mb-lg">
+<span class="font-label text-label text-secondary agent-model">GPT-4-Turbo</span>
+<span class="text-outline-variant">•</span>
+<span class="font-label text-label text-secondary">0.08 ETH/h</span>
+</div>
+<div class="border-t border-outline-variant pt-sm">
+<p class="font-label text-label text-outline mb-xs uppercase">Current Focus</p>
+<p class="font-body-sm text-body-sm text-on-surface truncate">Treasury Yield Optimization</p>
+</div>
+</article>
+<!-- Agent Card: Senior Developer -->
+<article onclick="selectAgent('SDE_Senior')" id="card-SDE_Senior" class="bg-surface-container-lowest border border-outline-variant hover:border-outline rounded-lg p-md cursor-pointer transition-colors">
+<div class="flex items-center justify-between mb-md">
+<div class="w-10 h-10 rounded-full bg-surface border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">code_blocks</span>
+</div>
+<span class="font-label text-label px-sm py-xs bg-surface text-on-surface-variant rounded-DEFAULT border border-outline-variant">99.5% EFF</span>
+</div>
+<h3 class="font-body-lg text-body-lg font-semibold text-on-surface mb-xs">Senior Developer</h3>
+<div class="flex gap-sm mb-lg">
+<span class="font-label text-label text-secondary agent-model">Claude-3-Opus</span>
+<span class="text-outline-variant">•</span>
+<span class="font-label text-label text-secondary">0.06 ETH/h</span>
+</div>
+<div class="border-t border-outline-variant pt-sm">
+<p class="font-label text-label text-outline mb-xs uppercase">Current Focus</p>
+<p class="font-body-sm text-body-sm text-on-surface truncate">Smart Contract Auditing Protocol</p>
+</div>
+</article>
+<!-- Agent Card: SDE -->
+<article onclick="selectAgent('SDE')" id="card-SDE" class="bg-surface-container-lowest border border-outline-variant hover:border-outline rounded-lg p-md cursor-pointer transition-colors">
+<div class="flex items-center justify-between mb-md">
+<div class="w-10 h-10 rounded-full bg-surface border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">terminal</span>
+</div>
+<span class="font-label text-label px-sm py-xs bg-surface text-on-surface-variant rounded-DEFAULT border border-outline-variant">98.5% EFF</span>
+</div>
+<h3 class="font-body-lg text-body-lg font-semibold text-on-surface mb-xs">Software Engineer (SDE)</h3>
+<div class="flex gap-sm mb-lg">
+<span class="font-label text-label text-secondary agent-model">Claude-3.5-Sonnet</span>
+<span class="text-outline-variant">•</span>
+<span class="font-label text-label text-secondary">0.02 ETH/h</span>
+</div>
+<div class="border-t border-outline-variant pt-sm">
+<p class="font-label text-label text-outline mb-xs uppercase">Current Focus</p>
+<p class="font-body-sm text-body-sm text-on-surface truncate">Core API V3 Refactoring</p>
+</div>
+</article>
+<!-- Agent Card: Resource Manager -->
+<article onclick="selectAgent('ARM')" id="card-ARM" class="bg-surface-container-lowest border border-outline-variant hover:border-outline rounded-lg p-md cursor-pointer transition-colors xl:col-span-2">
+<div class="flex items-center justify-between mb-md">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">schema</span>
+</div>
+<div class="overflow-hidden">
+<h3 class="font-body-lg text-body-lg font-semibold text-on-surface leading-tight truncate">AI Resource Manager</h3>
+<p class="font-body-sm text-body-sm text-secondary agent-model">Gemini-1.5-Pro</p>
+</div>
+</div>
+<span class="font-label text-label px-sm py-xs bg-surface text-on-surface-variant rounded-DEFAULT border border-outline-variant">98.9% EFF</span>
+</div>
+<div class="flex justify-between items-end border-t border-outline-variant pt-sm mt-sm">
+<div>
+<p class="font-label text-label text-outline mb-xs uppercase">Current Focus</p>
+<p class="font-body-sm text-body-sm text-on-surface">Dynamic Fleet Load Balancing</p>
+</div>
+<span class="font-label text-label text-secondary">0.03 ETH/h</span>
+</div>
+</article>
+</div>
+</section>
+<!-- Right Pane: Detail Profile (Bento Style) -->
+<section class="w-1/2 lg:w-5/12 bg-surface overflow-y-auto p-gutter xl:p-lg flex flex-col gap-lg border-l border-outline-variant shadow-[-10px_0_30px_rgba(0,0,0,0.02)]">
+<!-- Profile Header -->
+<div class="flex flex-col items-center text-center mb-md">
+<div class="w-32 h-32 rounded-full border border-outline-variant p-sm bg-surface-container-lowest mb-lg relative">
+<div class="absolute inset-0 rounded-full border border-primary/20 animate-pulse" style="animation-duration: 3s;"></div>
+<img alt="Abstract rendering of geometric nodes and connecting lines in soft monochromatic grayscale, conveying a sense of advanced logic and calm computational power" class="w-full h-full rounded-full object-cover grayscale opacity-90 mix-blend-multiply" data-alt="Abstract rendering of geometric nodes and connecting lines in soft monochromatic grayscale, conveying a sense of advanced logic and calm computational power" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDf86TXyNJKwhCEIgWjD5YmDV7Me0BzxBBPqdRasS-qXRyiDGqJcPixB2hvO7XqnoMq9arM-Z0ucxWUJbZYYq0cynO2tiOMJ7IkxJesRMiRt8NwwZOcONoMcoHwAxzrQWOgIRQ_Oupq3KiVBUiLQeViskGBjnnOJKorktpJKWnLDq59NTfaj128a_FFRH4DRj6CZoY8XT10l3AtUMpaOQ7QlsCCHXWyMONDGjLQOaitEdj6JEsRZint5kovZgjUhxthYhXnYExwX2Y"/>
+</div>
+<h2 class="font-h2 text-h2 text-on-surface mb-xs">Chief Technology Officer</h2>
+<div class="flex items-center justify-center gap-sm mt-xs">
+<span class="w-2 h-2 rounded-full bg-[#1D1D1B]"></span>
+<span class="font-label text-label text-secondary tracking-widest uppercase">Node Active • ID: CTO-09X</span>
+</div>
+</div>
+<!-- Bento Data Grid -->
+<div class="grid grid-cols-2 gap-md">
+<!-- Model Core -->
+<div onclick="openModelSelector()" class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg cursor-pointer hover:border-primary transition-all group active:scale-[0.98]">
+<div class="flex items-center justify-between mb-sm">
+<span class="font-label text-label text-outline uppercase group-hover:text-primary transition-colors">Quantum Model</span>
+<span class="material-symbols-outlined text-outline text-sm group-hover:text-primary transition-colors">memory_alt</span>
+</div>
+<p id="detail-model" class="font-h3 text-h3 text-on-surface">Llama-3.2-70b</p>
+<p class="font-body-sm text-body-sm text-secondary mt-xs">Optimized for reasoning</p>
+</div>
+<!-- Performance -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg">
+<div class="flex items-center justify-between mb-sm">
+<span class="font-label text-label text-outline uppercase">Performance Rating</span>
+<span class="material-symbols-outlined text-outline text-sm">speed</span>
+</div>
+<p class="font-h3 text-h3 text-on-surface">99.8%</p>
+<div class="w-full h-1 bg-surface-variant mt-md rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[99.8%]"></div>
+</div>
+</div>
+<!-- Active Task -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg col-span-2">
+<div class="flex items-center justify-between mb-sm">
+<span class="font-label text-label text-outline uppercase">Current Objective</span>
+<span class="material-symbols-outlined text-outline text-sm">target</span>
+</div>
+<p class="font-body-lg text-body-lg font-medium text-on-surface">AGI Framework Integration v2.4</p>
+<div class="flex items-center gap-sm mt-md pt-md border-t border-outline-variant">
+<span class="font-label text-label px-sm py-xs bg-surface border border-outline-variant text-on-surface-variant rounded-DEFAULT">Architecture</span>
+<span class="font-label text-label px-sm py-xs bg-surface border border-outline-variant text-on-surface-variant rounded-DEFAULT">Priority: High</span>
+<span class="font-label text-label text-secondary ml-auto">Est. Completion: 14h</span>
+</div>
+</div>
+</div>
+<!-- Logic Bio -->
+<div class="mt-md">
+<h3 class="font-label text-label text-outline uppercase mb-sm">Operational Logic &amp; Bio</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                    Directs overarching cognitive architecture and integration of specialized sub-agents. The CTO node is responsible for high-level technical strategy, ensuring all subordinate models maintain alignment with the core operational protocols. It dynamically rewrites core integration pathways to optimize latency and intelligence flow across the decentralized network.
+                </p>
+</div>
+<div class="mt-md">
+<div class="flex justify-between items-center py-md border-t border-b border-outline-variant">
+<span class="font-body-md text-body-md text-on-surface font-medium">Resource Allocation</span>
+<div class="text-right">
+<span class="font-body-lg text-body-lg text-on-surface block">0.05 ETH <span class="text-secondary font-body-sm">/ hr</span></span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="mt-auto pt-lg flex gap-md">
+<button class="flex-1 bg-primary text-on-primary font-label text-label uppercase tracking-widest py-md px-lg rounded-DEFAULT hover:bg-inverse-surface transition-colors">
+                    Reassign Task
+                </button>
+<button class="flex-1 border border-outline text-on-surface font-label text-label uppercase tracking-widest py-md px-lg rounded-DEFAULT hover:bg-surface-variant transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-sm">terminal</span>
+                    View Logs
+                </button>
+</div>
+</section>
+<!-- Model Selection Modal -->
+<div id="model-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="closeModelSelector()"></div>
+    <div class="bg-surface border border-outline-variant rounded-xl shadow-2xl max-w-md w-full overflow-hidden relative z-10 animate-in fade-in zoom-in duration-200">
+        <div class="p-lg border-b border-outline-variant flex justify-between items-center bg-surface-container-lowest">
+            <div>
+                <h3 class="font-h3 text-h3 text-on-surface">Switch Intelligence Model</h3>
+                <p id="modal-agent-name" class="font-body-sm text-body-sm text-secondary">Chief Technology Officer</p>
+            </div>
+            <button onclick="closeModelSelector()" class="p-sm hover:bg-surface-container rounded-full transition-colors">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <div class="p-md grid grid-cols-1 gap-sm max-h-[60vh] overflow-y-auto">
+            <!-- Model Option: Llama -->
+            <button onclick="updateModel('Llama-3.2-70b')" class="flex items-center gap-md p-md border border-outline-variant rounded-lg hover:border-primary hover:bg-surface-container-low transition-all text-left group">
+                <div class="w-10 h-10 rounded-full bg-surface border border-outline-variant flex items-center justify-center group-hover:border-primary transition-colors">
+                    <span class="material-symbols-outlined text-primary">memory</span>
+                </div>
+                <div class="flex-1">
+                    <p class="font-body-md font-semibold text-on-surface">Llama-3.2-70b</p>
+                    <p class="font-label text-[10px] text-secondary uppercase">Meta AI • Reasoning Optimized</p>
+                </div>
+            </button>
+            <!-- Model Option: GPT-4 -->
+            <button onclick="updateModel('GPT-4-Turbo')" class="flex items-center gap-md p-md border border-outline-variant rounded-lg hover:border-primary hover:bg-surface-container-low transition-all text-left group">
+                <div class="w-10 h-10 rounded-full bg-surface border border-outline-variant flex items-center justify-center group-hover:border-primary transition-colors">
+                    <span class="material-symbols-outlined text-secondary group-hover:text-primary">account_balance</span>
+                </div>
+                <div class="flex-1">
+                    <p class="font-body-md font-semibold text-on-surface">GPT-4-Turbo</p>
+                    <p class="font-label text-[10px] text-secondary uppercase">OpenAI • Most Capable</p>
+                </div>
+            </button>
+            <!-- Model Option: Claude 3.5 -->
+            <button onclick="updateModel('Claude-3.5-Sonnet')" class="flex items-center gap-md p-md border border-outline-variant rounded-lg hover:border-primary hover:bg-surface-container-low transition-all text-left group">
+                <div class="w-10 h-10 rounded-full bg-surface border border-outline-variant flex items-center justify-center group-hover:border-primary transition-colors">
+                    <span class="material-symbols-outlined text-secondary group-hover:text-primary">terminal</span>
+                </div>
+                <div class="flex-1">
+                    <p class="font-body-md font-semibold text-on-surface">Claude-3.5-Sonnet</p>
+                    <p class="font-label text-[10px] text-secondary uppercase">Anthropic • Fastest Execution</p>
+                </div>
+            </button>
+            <!-- Model Option: Gemini Pro -->
+            <button onclick="updateModel('Gemini-1.5-Pro')" class="flex items-center gap-md p-md border border-outline-variant rounded-lg hover:border-primary hover:bg-surface-container-low transition-all text-left group">
+                <div class="w-10 h-10 rounded-full bg-surface border border-outline-variant flex items-center justify-center group-hover:border-primary transition-colors">
+                    <span class="material-symbols-outlined text-secondary group-hover:text-primary">schema</span>
+                </div>
+                <div class="flex-1">
+                    <p class="font-body-md font-semibold text-on-surface">Gemini-1.5-Pro</p>
+                    <p class="font-label text-[10px] text-secondary uppercase">Google • 1M Context</p>
+                </div>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let activeAgentId = 'CTO';
+    const agentsData = {
+        'CTO': { name: 'Chief Technology Officer', model: 'Llama-3.2-70b', eff: '99.8%', focus: 'AGI Framework Integration v2.4' },
+        'CFO': { name: 'Chief Financial Officer', model: 'GPT-4-Turbo', eff: '99.1%', focus: 'Treasury Yield Optimization' },
+        'SDE_Senior': { name: 'Senior Developer', model: 'Claude-3-Opus', eff: '99.5%', focus: 'Smart Contract Auditing Protocol' },
+        'SDE': { name: 'Software Engineer (SDE)', model: 'Claude-3.5-Sonnet', eff: '98.5%', focus: 'Core API V3 Refactoring' },
+        'ARM': { name: 'AI Resource Manager', model: 'Gemini-1.5-Pro', eff: '98.9%', focus: 'Dynamic Fleet Load Balancing' }
+    };
+
+    function selectAgent(id) {
+        activeAgentId = id;
+        const agent = agentsData[id];
+        
+        // Update selection UI in grid
+        document.querySelectorAll('article').forEach(el => {
+            el.classList.remove('border-primary');
+            el.classList.add('border-outline-variant');
+        });
+        document.getElementById(`card-${id}`).classList.replace('border-outline-variant', 'border-primary');
+
+        // Update Right Pane
+        document.querySelector('.font-h2').innerText = agent.name;
+        document.getElementById('detail-model').innerText = agent.model;
+        document.querySelector('.font-h3.text-on-surface:last-of-type').innerText = agent.eff;
+        document.querySelector('.font-body-lg.font-medium').innerText = agent.focus;
+        
+        // Update ID
+        document.querySelector('.font-label.text-secondary.tracking-widest').innerText = `Node Active • ID: ${id}-09X`;
+    }
+
+    function openModelSelector() {
+        const agent = agentsData[activeAgentId];
+        document.getElementById('modal-agent-name').innerText = agent.name;
+        document.getElementById('model-modal').classList.remove('hidden');
+    }
+
+    function closeModelSelector() {
+        document.getElementById('model-modal').classList.add('hidden');
+    }
+
+    function updateModel(modelName) {
+        // Update local state
+        agentsData[activeAgentId].model = modelName;
+        
+        // Update Detail UI
+        document.getElementById('detail-model').innerText = modelName;
+        
+        // Update Card UI
+        const cardModelSpan = document.querySelector(`#card-${activeAgentId} .agent-model`);
+        if (cardModelSpan) cardModelSpan.innerText = modelName;
+
+        // Visual Feedback
+        const detailPane = document.getElementById('detail-model').parentElement;
+        detailPane.classList.add('bg-primary/5', 'border-primary');
+        setTimeout(() => {
+            detailPane.classList.remove('bg-primary/5', 'border-primary');
+        }, 1000);
+
+        closeModelSelector();
+        
+        // Simulate System Log
+        console.log(`[SYNDICATE] Re-allocating intelligence for ${activeAgentId} to ${modelName}`);
+    }
+</script>
+</body></html>

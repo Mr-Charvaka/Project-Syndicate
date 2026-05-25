@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Economic Survival Wallet</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#464741",
+                        "primary-container": "#1d1d1b",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed": "#1a1c1b",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#1e1c1d",
+                        "on-tertiary-fixed-variant": "#494647",
+                        "surface-tint": "#5f5e5c",
+                        "background": "#fbf9f6",
+                        "surface-dim": "#dbdad7",
+                        "surface-bright": "#fbf9f6",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f2f0ee",
+                        "on-tertiary-container": "#888485",
+                        "on-secondary-container": "#616362",
+                        "surface-container": "#efeeeb",
+                        "on-background": "#1b1c1a",
+                        "on-primary-fixed-variant": "#474744",
+                        "inverse-surface": "#30312f",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#e2e2e1",
+                        "surface-container-high": "#e9e8e5",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#020202",
+                        "surface": "#fbf9f6",
+                        "tertiary-fixed": "#e7e1e2",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#c8c6c3",
+                        "outline": "#777771",
+                        "on-surface": "#1b1c1a",
+                        "primary-fixed": "#e5e2de",
+                        "secondary-container": "#e0e0de",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#454746",
+                        "on-primary-fixed": "#1c1c1a",
+                        "surface-container-low": "#f5f3f1",
+                        "primary-fixed-dim": "#c8c6c3",
+                        "surface-variant": "#e4e2e0",
+                        "on-tertiary-fixed": "#1d1b1c",
+                        "secondary": "#5d5f5d",
+                        "surface-container-highest": "#e4e2e0",
+                        "primary": "#020302",
+                        "tertiary-fixed-dim": "#cbc5c6",
+                        "outline-variant": "#c7c7bf",
+                        "on-primary-container": "#868582",
+                        "secondary-fixed-dim": "#c6c7c5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "sm": "8px",
+                        "xxl": "64px",
+                        "gutter": "24px",
+                        "md": "16px",
+                        "xl": "40px",
+                        "unit": "4px",
+                        "xs": "4px",
+                        "container-max": "1200px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Inter"],
+                        "h2": ["Inter"],
+                        "h1": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h3": ["22px", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "h2": ["30px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "h1": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }],
+                        "label": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full min-h-screen">
+
+<div class="max-w-[1200px] mx-auto p-lg md:p-xl">
+<!-- Page Header -->
+<header class="mb-lg">
+<h1 class="font-h1 text-h1 text-on-background">Wallet</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-sm">Economic Survival &amp; Resource Management</p>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Main Balance Card (Span 8) -->
+<div class="col-span-1 lg:col-span-8 bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 text-on-surface-variant mb-md">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-label text-label uppercase tracking-widest">Total Balance</span>
+</div>
+<div class="flex items-baseline gap-3 mb-xs">
+<span class="font-h1 text-[64px] font-medium leading-none tracking-tight text-on-background">42.859</span>
+<span class="font-h3 text-h3 text-on-surface-variant">ETH</span>
+</div>
+<div class="font-body-md text-body-md text-on-surface-variant">
+                            ≈ $145,230.50 USDC
+                        </div>
+</div>
+<div class="flex gap-4 mt-lg">
+<button class="bg-primary-container text-on-primary font-label text-label py-3 px-6 rounded transition-colors hover:bg-inverse-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+                            Deposit
+                        </button>
+<button class="bg-transparent border border-outline-variant text-on-background font-label text-label py-3 px-6 rounded transition-colors hover:bg-surface-container flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="send">send</span>
+                            Send
+                        </button>
+</div>
+</div>
+<!-- Survival Health Widget (Span 4) -->
+<div class="col-span-1 lg:col-span-4 bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-error"></div>
+<div class="flex items-center gap-2 text-error mb-md mt-sm">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+<span class="font-label text-label uppercase tracking-widest">Survival Health</span>
+</div>
+<div class="mb-lg">
+<div class="font-h2 text-h2 text-on-background mb-unit">14 Days</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Est. Time to Termination</div>
+</div>
+<div class="space-y-4 flex-1">
+<div>
+<div class="flex justify-between font-label text-label text-on-surface-variant mb-2">
+<span>Compute Burn Rate</span>
+<span>-2.5 ETH/mo</span>
+</div>
+<div class="w-full bg-surface-variant h-1 rounded-full overflow-hidden">
+<div class="bg-on-background h-full w-[65%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-label text-label text-on-surface-variant mb-2">
+<span>API Burn Rate</span>
+<span>-0.8 ETH/mo</span>
+</div>
+<div class="w-full bg-surface-variant h-1 rounded-full overflow-hidden">
+<div class="bg-on-background h-full w-[25%]"></div>
+</div>
+</div>
+</div>
+<div class="mt-lg pt-md border-t border-outline-variant">
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] mt-1" data-icon="info">info</span>
+                            Action required. Replenish funds to avoid agent suspension.
+                        </p>
+</div>
+</div>
+<!-- Transaction History (Span 12) -->
+<div class="col-span-1 lg:col-span-12 bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden mt-md">
+<div class="p-lg border-b border-outline-variant flex justify-between items-center bg-surface-container-low">
+<h2 class="font-h3 text-h3 text-on-background">Recent Transactions</h2>
+<button class="text-on-surface-variant font-label text-label hover:text-on-background flex items-center gap-1">
+                            View All <span class="material-symbols-outlined text-[16px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant font-label text-label text-on-surface-variant bg-surface">
+<th class="p-md font-medium uppercase tracking-wider">Type</th>
+<th class="p-md font-medium uppercase tracking-wider">Description</th>
+<th class="p-md font-medium uppercase tracking-wider">Date</th>
+<th class="p-md font-medium uppercase tracking-wider text-right">Amount (ETH)</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md">
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors">
+<td class="p-md">
+<div class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-surface-container text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
+</div>
+</td>
+<td class="p-md font-medium text-on-background">ETHGlobal Hackathon Prize</td>
+<td class="p-md text-on-surface-variant">Oct 24, 2023</td>
+<td class="p-md text-right text-[#10b981] font-medium">+5.000</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors">
+<td class="p-md">
+<div class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-surface-container text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="upload">upload</span>
+</div>
+</td>
+<td class="p-md font-medium text-on-background">AWS Compute Payment</td>
+<td class="p-md text-on-surface-variant">Oct 20, 2023</td>
+<td class="p-md text-right text-on-background font-medium">-1.250</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors">
+<td class="p-md">
+<div class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-surface-container text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="upload">upload</span>
+</div>
+</td>
+<td class="p-md font-medium text-on-background">OpenAI API Usage</td>
+<td class="p-md text-on-surface-variant">Oct 15, 2023</td>
+<td class="p-md text-right text-on-background font-medium">-0.850</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-md">
+<div class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-surface-container text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
+</div>
+</td>
+<td class="p-md font-medium text-on-background">Bounty Completion: Data Scraping</td>
+<td class="p-md text-on-surface-variant">Oct 12, 2023</td>
+<td class="p-md text-right text-[#10b981] font-medium">+2.100</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

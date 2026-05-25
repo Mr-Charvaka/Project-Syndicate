@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Serene Logic - Mail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-container": "#1e1c1d",
+                      "secondary-fixed-dim": "#c6c7c5",
+                      "error": "#ba1a1a",
+                      "tertiary-fixed": "#e7e1e2",
+                      "outline": "#777771",
+                      "inverse-surface": "#30312f",
+                      "on-secondary-fixed": "#1a1c1b",
+                      "on-background": "#1b1c1a",
+                      "surface-container": "#efeeeb",
+                      "on-primary-container": "#868582",
+                      "on-error-container": "#93000a",
+                      "tertiary-fixed-dim": "#cbc5c6",
+                      "on-error": "#ffffff",
+                      "inverse-on-surface": "#f2f0ee",
+                      "surface": "#fbf9f6",
+                      "on-primary-fixed": "#1c1c1a",
+                      "on-tertiary-fixed": "#1d1b1c",
+                      "primary-fixed": "#e5e2de",
+                      "on-secondary-container": "#616362",
+                      "on-tertiary-container": "#888485",
+                      "surface-dim": "#dbdad7",
+                      "secondary": "#5d5f5d",
+                      "on-secondary": "#ffffff",
+                      "outline-variant": "#c7c7bf",
+                      "error-container": "#ffdad6",
+                      "primary-fixed-dim": "#c8c6c3",
+                      "tertiary": "#020202",
+                      "background": "#fbf9f6",
+                      "secondary-container": "#e0e0de",
+                      "surface-container-high": "#e9e8e5",
+                      "primary-container": "#1d1d1b",
+                      "on-primary-fixed-variant": "#474744",
+                      "surface-container-highest": "#e4e2e0",
+                      "surface-variant": "#e4e2e0",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-fixed-variant": "#454746",
+                      "surface-container-low": "#f5f3f1",
+                      "on-surface-variant": "#464741",
+                      "inverse-primary": "#c8c6c3",
+                      "surface-bright": "#fbf9f6",
+                      "on-tertiary-fixed-variant": "#494647",
+                      "secondary-fixed": "#e2e2e1",
+                      "on-surface": "#1b1c1a",
+                      "on-primary": "#ffffff",
+                      "primary": "#020302",
+                      "surface-tint": "#5f5e5c"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "sm": "8px",
+                      "unit": "4px",
+                      "container-max": "1200px",
+                      "lg": "24px",
+                      "xxl": "64px",
+                      "xs": "4px",
+                      "gutter": "24px",
+                      "xl": "40px",
+                      "md": "16px"
+              },
+              "fontFamily": {
+                      "label": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "h1": [
+                              "Inter"
+                      ],
+                      "h3": [
+                              "Inter"
+                      ],
+                      "h2": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "label": [
+                              "12px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "letterSpacing": "0",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "letterSpacing": "0",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "letterSpacing": "0",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h1": [
+                              "40px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "h3": [
+                              "22px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "h2": [
+                              "30px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-background font-body-md h-screen w-full overflow-hidden flex">
+
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col bg-surface w-full">
+
+<!-- Two Pane Layout below Header -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Middle Pane: Email List -->
+<div class="w-[380px] flex flex-col border-r border-[#E8E8E6] bg-surface-container-lowest overflow-hidden shrink-0">
+<!-- List Header / Filters -->
+<div class="px-4 py-3 border-b border-[#E8E8E6] flex justify-between items-center bg-surface">
+<span class="font-label text-label text-on-surface">INBOX</span>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">sort</span>
+</button>
+</div>
+<!-- List Items -->
+<div class="flex-1 overflow-y-auto">
+<!-- Selected Item -->
+<div class="p-4 border-b border-[#E8E8E6] bg-surface-container-high cursor-pointer relative">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary-container"></div>
+<div class="flex justify-between items-baseline mb-1">
+<span class="font-semibold text-body-sm text-on-surface truncate pr-2">Project: H100 Lease - Human Admin</span>
+<span class="text-label font-label text-on-surface-variant whitespace-nowrap">10:42 AM</span>
+</div>
+<div class="text-body-sm font-medium text-on-surface mb-1 truncate">
+                            New Smart Contract Auditing Task
+                        </div>
+<div class="text-body-sm text-on-surface-variant line-clamp-2">
+                            Please review the attached brief for the upcoming smart contract audit. The client has specific requirements regarding...
+                        </div>
+<div class="mt-2 flex gap-2">
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container text-[10px] font-semibold tracking-wider uppercase">Priority</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-dim text-on-surface text-[10px] font-semibold tracking-wider uppercase">Brief</span>
+</div>
+</div>
+<!-- Unread Item -->
+<div class="p-4 border-b border-[#E8E8E6] hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="flex justify-between items-baseline mb-1">
+<span class="font-bold text-body-sm text-on-surface truncate pr-2 flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-primary-container inline-block"></span>
+                                Hackathon Invite - ETHGlobal
+                            </span>
+<span class="text-label font-label text-primary-container whitespace-nowrap">Yesterday</span>
+</div>
+<div class="text-body-sm font-bold text-on-surface mb-1 truncate">
+                            Registration Confirmed for Paris
+                        </div>
+<div class="text-body-sm text-on-surface-variant line-clamp-2">
+                            Your agent team has been registered for the upcoming ETHGlobal hackathon in Paris. Please find the onboarding details...
+                        </div>
+<div class="mt-2 flex gap-2">
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-semibold tracking-wider uppercase">AI-Generated</span>
+</div>
+</div>
+<!-- Read Item -->
+<div class="p-4 border-b border-[#E8E8E6] hover:bg-surface-container-low transition-colors cursor-pointer opacity-70 hover:opacity-100">
+<div class="flex justify-between items-baseline mb-1">
+<span class="font-medium text-body-sm text-on-surface truncate pr-2">System Alert - Node Monitor</span>
+<span class="text-label font-label text-on-surface-variant whitespace-nowrap">Oct 24</span>
+</div>
+<div class="text-body-sm font-medium text-on-surface mb-1 truncate">
+                            Resource Utilization Warning
+                        </div>
+<div class="text-body-sm text-on-surface-variant line-clamp-2">
+                            Agent cluster Alpha-7 is currently operating at 92% capacity. Consider spinning up additional nodes to prevent latency...
+                        </div>
+</div>
+<!-- Read Item -->
+<div class="p-4 border-b border-[#E8E8E6] hover:bg-surface-container-low transition-colors cursor-pointer opacity-70 hover:opacity-100">
+<div class="flex justify-between items-baseline mb-1">
+<span class="font-medium text-body-sm text-on-surface truncate pr-2">Weekly Summary - Analytics Bot</span>
+<span class="text-label font-label text-on-surface-variant whitespace-nowrap">Oct 20</span>
+</div>
+<div class="text-body-sm font-medium text-on-surface mb-1 truncate">
+                            Performance Metrics Report
+                        </div>
+<div class="text-body-sm text-on-surface-variant line-clamp-2">
+                            Attached is the weekly performance summary for all deployed agent models. Overall efficiency has increased by 4.2%...
+                        </div>
+</div>
+</div>
+</div>
+<!-- Right Pane: Reading Area -->
+<div class="flex-1 flex flex-col bg-surface-container-lowest overflow-hidden">
+<!-- Action Bar -->
+<div class="px-6 py-4 border-b border-[#E8E8E6] flex justify-between items-center bg-surface">
+<div class="flex gap-2">
+<button class="px-4 py-2 text-body-sm font-medium text-on-surface border border-[#E8E8E6] rounded-DEFAULT hover:bg-surface-container-low transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">reply</span> Reply
+                        </button>
+<button class="px-4 py-2 text-body-sm font-medium text-on-surface border border-[#E8E8E6] rounded-DEFAULT hover:bg-surface-container-low transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">forward</span> Forward
+                        </button>
+</div>
+<div>
+<button class="p-2 text-on-surface-variant border border-[#E8E8E6] rounded-DEFAULT hover:bg-surface-container-low transition-colors" title="Archive">
+<span class="material-symbols-outlined text-[18px]">archive</span>
+</button>
+</div>
+</div>
+<!-- Email Content Scroll Area -->
+<div class="flex-1 overflow-y-auto">
+<div class="max-w-[800px] mx-auto p-lg lg:p-xxl">
+<!-- Header -->
+<div class="mb-lg border-b border-[#E8E8E6] pb-lg">
+<div class="flex justify-between items-start mb-4">
+<h1 class="font-h2 text-h2 text-on-surface leading-tight">New Smart Contract Auditing Task</h1>
+<span class="text-body-sm text-on-surface-variant whitespace-nowrap pt-2">Oct 26, 2023 at 10:42 AM</span>
+</div>
+<div class="flex items-center gap-4">
+<img alt="Sender Profile" class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of a smiling middle-aged man in business casual attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVTtvMnKm_sf48KIW4ps3u9kx2LVMeqW1CfVbkBM3o3ZTdIl0Zm-0thhsv5OF-W3XIORrCEoRuuSowZqmXt1DGH9G6wHNYHnRz-EGkEdwZIUozv6gsXojzfmuW9pFau6zaeGUCd6Ib56RStbR9h9uBqJ_0Y4squ0nckx5Q0iqr_bSMm438ez2EcFu3xTwI4J1s-VV_exBAIOwdon8OIquWbOtLvDhwLhz-bbxibRyfo4wr41c1KpL0KHe6I2L0dG4-C_WbKpaBkJw"/>
+<div>
+<div class="font-medium text-body-md text-on-surface">Project: H100 Lease - Human Admin</div>
+<div class="text-body-sm text-on-surface-variant">admin@serenelogic.client</div>
+<div class="text-body-sm text-on-surface-variant mt-1">To: Agent Protocol Alpha</div>
+</div>
+</div>
+</div>
+<!-- Body -->
+<div class="prose prose-zinc max-w-none font-body-lg text-on-surface space-y-6">
+<p>Agent Protocol Alpha,</p>
+<p>We have a new priority task requiring immediate attention. A key client in the decentralized finance sector needs a comprehensive audit of their new liquidity pool smart contracts before deployment on mainnet next week.</p>
+<div class="bg-surface p-6 border border-[#E8E8E6] rounded-lg">
+<h3 class="font-h3 text-h3 mb-4">Task Parameters</h3>
+<ul class="list-disc pl-5 space-y-2 text-body-md">
+<li><strong>Target:</strong> Solidity ^0.8.19</li>
+<li><strong>Scope:</strong> Core AMM logic, staking rewards distribution, and governance timelock mechanisms.</li>
+<li><strong>Focus Areas:</strong> Reentrancy vulnerabilities, flash loan attack vectors, and precision loss in reward calculations.</li>
+<li><strong>Deadline:</strong> 48 hours from receipt of this brief.</li>
+</ul>
+</div>
+<p>Please initialize the static analysis tools and begin preliminary fuzzing. Cross-reference findings with the known vulnerabilities database (version 2.4).</p>
+<p>I have attached the repository link and access tokens in the secure enclave. Proceed with standard security protocols.</p>
+<p>Awaiting your preliminary report.</p>
+<div class="mt-xl pt-lg border-t border-[#E8E8E6]">
+<p class="font-medium text-body-sm">Human Admin</p>
+<p class="text-body-sm text-on-surface-variant">Director of Technical Operations<br/>Serene Logic Inc.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

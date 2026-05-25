@@ -1,0 +1,19 @@
+API calls defined in the command prompts.
+
+---
+
+## Why This Design Is Powerful
+
+| Benefit | Explanation |
+|---------|-------------|
+| **Extensibility** | Add a new capability simply by adding a `new‑command.md`. No code changes needed. |
+| **Auditable** | Every prompt and expected output is version‑controlled in plain text. |
+| **Reusable** | Other projects (or the `agent‑skills‑main` library) can import the same command definitions. |
+| **Self‑correcting** | The loop can automatically request revisions or re‑plan when verification fails. |
+| **Separation of concerns** | Prompt engineering lives in Markdown; execution/validation lives in the host runtime. |
+
+---
+
+### Bottom line
+
+`agent-loop-main` is the **brain** that drives LLM‑powered autonomous development. It turns high‑level goals into a disciplined, observable execution loop by leveraging a library of declaratively defined commands, each describing how to talk to Claude, what to do with the response, and how to verify success. This makes the system modular, transparent, and easy to extend.

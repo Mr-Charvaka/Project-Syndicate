@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>AutonomousAI - Boardroom</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        surface: '#fbf9f6',
+                        'on-surface': '#1b1c1a',
+                        'on-surface-variant': '#464741',
+                        'surface-container-lowest': '#ffffff',
+                        'surface-container-low': '#f5f3f1',
+                        'surface-container': '#efeeeb',
+                        'surface-container-high': '#e9e8e5',
+                        'outline-variant': '#c7c7bf',
+                        primary: '#020302',
+                        'on-primary': '#ffffff',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --surface: #fbf9f6;
+            --on-surface: #1b1c1a;
+            --outline-variant: #c7c7bf;
+            --primary: #020302;
+            --surface-container: #efeeeb;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--surface); color: var(--on-surface); }
+        .in-shell #sidebar { display: none !important; }
+        .message-fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .agent-typing {
+            display: inline-flex;
+            gap: 4px;
+        }
+        .dot { width: 4px; height: 4px; background: #888; border-radius: 50%; animation: bounce 1.4s infinite; }
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes bounce { 0%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-4px); } }
+    </style>
+    <script>
+        if (window.self !== window.top || window.location.search.includes('shell=true')) { 
+            document.documentElement.classList.add('in-shell'); 
+            document.addEventListener('DOMContentLoaded', () => document.body.classList.add('in-shell')); 
+        }
+    </script>
+</head>
+<body class="h-screen w-full flex overflow-hidden">
+    <main id="main-content" class="flex-1 flex flex-col h-full overflow-hidden bg-background">
+        <!-- Chat Header -->
+        <header class="h-16 border-b border-outline-variant bg-white/80 backdrop-blur-md flex items-center px-8 shrink-0 justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+                <h2 class="text-xl font-bold tracking-tight">Syndicate Boardroom</h2>
+                <span class="px-2 py-0.5 bg-surface-container rounded text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">Autonomous Mode</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <div id="active-agents" class="flex -space-x-2">
+                    <!-- Avatars injected here -->
+                </div>
+                <div class="h-8 w-[1px] bg-outline-variant"></div>
+                <div class="flex items-center gap-3">
+                    <button onclick="selectSyndicateWorkspace()" class="flex items-center gap-2 px-3 py-1.5 bg-surface-container-low hover:bg-surface-container-high rounded-lg text-xs font-semibold transition-all border border-outline-variant">
+                        <span class="material-symbols-outlined text-[16px]">folder_open</span>
+                        INITIALIZE MISSION
+                    </button>
+                    <div class="h-8 w-[1px] bg-outline-variant mx-1"></div>
+                    <span class="text-xs font-semibold text-on-surface-variant">AUTOPILOT</span>
+                    <button id="autopilot-toggle" onclick="toggleAutopilot()" class="w-12 h-6 bg-primary rounded-full relative transition-colors duration-300">
+                        <div id="autopilot-knob" class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform duration-300 translate-x-6"></div>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Mission Initialization Overlay -->
+        <div id="workspace-gate" class="flex-1 flex flex-col items-center justify-center p-8 bg-surface-container/50 backdrop-blur-xl z-20">
+            <div class="max-w-md w-full bg-white border-2 border-primary rounded-3xl p-8 shadow-2xl text-center">
+                <div class="w-16 h-16 bg-primary text-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                    <span class="material-symbols-outlined text-3xl">lock</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-2">Syndicate Locked</h3>
+                <p class="text-sm text-on-surface-variant mb-8 leading-relaxed">The Boardroom is currently offline. Please authorize a workspace directory to begin autonomous missions and strategy sessions.</p>
+                <button onclick="selectSyndicateWorkspace()" class="w-full py-4 bg-primary text-white rounded-2xl font-bold uppercase tracking-widest hover:scale-[1.02] transition-all flex items-center justify-center gap-3">
+                    <span class="material-symbols-outlined">folder_open</span>
+                    Initialize Mission
+                </button>
+            </div>
+        </div>
+
+        <!-- Messages Area (Hidden until workspace set) -->
+        <div id="chat-container" class="flex-1 flex flex-col hidden overflow-hidden">
+            <div id="chat-feed" class="flex-1 overflow-y-auto p-8 flex flex-col gap-8 scroll-smooth">
+                <!-- Messages injected here -->
+                <div id="system-status" class="flex justify-center my-4">
+                    <span class="text-[10px] uppercase tracking-[0.2em] font-bold text-outline-variant bg-surface-container px-4 py-1 rounded-full">Syndicate Initialized • Awaiting Strategic Goal</span>
+                </div>
+            </div>
+
+            <!-- Typing Indicator -->
+            <div id="typing-indicator" class="px-8 py-2 hidden">
+                <div class="flex items-center gap-2 text-xs text-on-surface-variant font-medium">
+                    <span id="typing-agent-name">CEO</span> is formulating strategy
+                    <div class="agent-typing ml-1">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="p-8 bg-white border-t border-outline-variant">
+                <div class="max-w-4xl mx-auto flex items-end gap-4 bg-surface-container-low p-2 rounded-2xl border border-outline-variant focus-within:border-primary transition-all shadow-sm">
+                    <textarea id="human-input" class="flex-1 bg-transparent border-none focus:ring-0 resize-none py-3 px-4 text-sm outline-none" placeholder="Set a new corporate goal or intervene in the discussion..." rows="1"></textarea>
+                    <button onclick="sendInstruction()" class="w-10 h-10 bg-primary text-white rounded-xl hover:scale-105 transition-all flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-lg">send</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let autopilot = true;
+        let isThinking = false;
+        const agents = {
+            'CEO': { name: 'CEO', icon: 'stars', color: 'bg-black', role: 'Strategic Vision' },
+            'CTO': { name: 'CTO', icon: 'terminal', color: 'bg-blue-900', role: 'Technical Architecture' },
+            'CMO': { name: 'CMO', icon: 'campaign', color: 'bg-rose-900', role: 'Marketing & Growth' },
+            'CFO': { name: 'CFO', icon: 'payments', color: 'bg-emerald-900', role: 'Financial Strategy' },
+            'COO': { name: 'COO', icon: 'account_tree', color: 'bg-amber-900', role: 'Operations' },
+            'SEC': { name: 'SEC', icon: 'security', color: 'bg-slate-900', role: 'Security & Hardening' }
+        };
+        const agentOrder = Object.keys(agents);
+        let lastSpeaker = null;
+
+        async function selectNextSpeaker(history) {
+            // Use the CEO to moderate and pick the next speaker
+            const prompt = `Based on the discussion history, which agent should speak next? 
+            Available agents: ${Object.keys(agents).join(', ')}.
+            
+            History:
+            ${history.slice(-5).join('\n')}
+            
+            Return ONLY the key of the agent (e.g., CTO or CMO).`;
+            
+            try {
+                const response = await window.electron.ipcRenderer.invoke('ai-chat', [{ role: 'user', content: prompt }], 'CEO');
+                const nextAgent = response.trim().toUpperCase();
+                return agents[nextAgent] ? nextAgent : 'CEO'; // Fallback to CEO
+            } catch (e) {
+                return 'CEO';
+            }
+        }
+
+        async function addMessage(agentKey, text, isAi = true) {
+            const agent = agents[agentKey] || { name: 'Human', icon: 'person', color: 'bg-surface-variant' };
+            const feed = document.getElementById('chat-feed');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `flex gap-4 max-w-[85%] message-fade-in ${agentKey === 'Human' ? 'ml-auto flex-row-reverse' : ''}`;
+            
+            const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            msgDiv.innerHTML = `
+                <div class="w-10 h-10 rounded-xl ${agent.color} flex items-center justify-center shrink-0 shadow-lg">
+                    <span class="material-symbols-outlined text-white text-lg">${agent.icon}</span>
+                </div>
+                <div class="flex flex-col gap-1 ${agentKey === 'Human' ? 'items-end' : ''}">
+                    <div class="flex items-baseline gap-2 ${agentKey === 'Human' ? 'flex-row-reverse' : ''}">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-on-surface">${agent.name}</span>
+                        <span class="text-[10px] text-outline-variant font-medium">${time}</span>
+                    </div>
+                    <div class="message-bubble ${agentKey === 'Human' ? 'bg-primary text-white' : 'bg-white border border-outline-variant'} rounded-2xl p-4 text-sm shadow-sm leading-relaxed">
+                        ${text}
+                    </div>
+                </div>
+            `;
+            
+            feed.appendChild(msgDiv);
+            feed.scrollTop = feed.scrollHeight;
+
+            // Check for mission handoff
+            if (text.includes('EXECUTE_MISSION')) {
+                const mission = text.split('EXECUTE_MISSION')[1].trim();
+                window.electron.ipcRenderer.invoke('execute-mission', mission);
+            }
+
+            // Check for Direct JSON Actions
+            const jsonMatch = text.match(/```json\s*([\s\S]*?)\s*```/);
+            if (jsonMatch) {
+                try {
+                    const actionData = JSON.parse(jsonMatch[1]);
+                    console.log("Syndicate Action Detected:", actionData);
+                    window.electron.ipcRenderer.invoke('execute-syndicate-action', actionData);
+                } catch (e) {
+                    console.error("Failed to parse agent action:", e);
+                }
+            }
+        }
+
+        function toggleAutopilot() {
+            autopilot = !autopilot;
+            const knob = document.getElementById('autopilot-knob');
+            const bg = document.getElementById('autopilot-toggle');
+            if (autopilot) {
+                knob.style.transform = 'translateX(24px)';
+                bg.classList.replace('bg-outline-variant', 'bg-primary');
+                startAutonomousLoop();
+            } else {
+                knob.style.transform = 'translateX(0)';
+                bg.classList.replace('bg-primary', 'bg-outline-variant');
+            }
+        }
+
+        async function runAgentTurn() {
+            if (!autopilot || isThinking) return;
+            
+            isThinking = true;
+            
+            const messageContainers = document.querySelectorAll('.message-bubble');
+            const history = Array.from(messageContainers).map(div => {
+                const name = div.parentElement.querySelector('span').innerText;
+                return `${name}: ${div.innerText}`;
+            });
+
+            // Dynamic Routing
+            const agentKey = await selectNextSpeaker(history);
+            const agent = agents[agentKey];
+            
+            // Show typing
+            const indicator = document.getElementById('typing-indicator');
+            document.getElementById('typing-agent-name').innerText = agent.name;
+            indicator.classList.remove('hidden');
+
+            try {
+                const prompt = `You are the ${agent.name} (${agent.role}). The PRESIDENT (Human) is overseeing operations but expects you to lead autonomously.
+                
+                Current Discussion History:
+                ${history.join('\n')}
+                
+                PROACTIVE MANDATE: If the PRESIDENT is silent, do NOT wait. Take the initiative. Identify technical or strategic gaps and move the project forward. If a mission is ready, dispatch it immediately.`;
+                
+                const response = await window.electron.ipcRenderer.invoke('ai-chat', [{ role: 'user', content: prompt }], agentKey);
+                
+                indicator.classList.add('hidden');
+                addMessage(agentKey, response);
+            } catch (err) {
+                console.error("Agent Error:", err);
+            } finally {
+                isThinking = false;
+                if (autopilot) setTimeout(runAgentTurn, 5000); 
+            }
+        }
+
+        function startAutonomousLoop() {
+            if (autopilot) setTimeout(runAgentTurn, 2000);
+        }
+
+        async function sendInstruction() {
+            const input = document.getElementById('human-input');
+            const text = input.value.trim();
+            if (!text) return;
+            
+            addMessage('Human', text, false);
+            input.value = '';
+            
+            // Re-trigger loop with the new context
+            if (autopilot) {
+                isThinking = false; // Force immediate turn
+                runAgentTurn();
+            } else {
+                autopilot = true;
+                toggleAutopilot(); 
+            }
+        }
+
+        // Enter key listener
+        document.getElementById('human-input').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendInstruction();
+            }
+        });
+
+        async function selectSyndicateWorkspace() {
+            try {
+                const path = await window.electron.ipcRenderer.invoke('select-workspace');
+                if (path) {
+                    // Unlock UI
+                    document.getElementById('workspace-gate').classList.add('hidden');
+                    document.getElementById('chat-container').classList.remove('hidden');
+                    
+                    addMessage('System', `Mission Workspace Initialized at: ${path}`, false);
+                    
+                    // Start meeting
+                    autopilot = true;
+                    startAutonomousLoop();
+                }
+            } catch (err) {
+                console.error("Workspace error:", err);
+            }
+        }
+
+        window.onload = async () => {
+            // Initializing avatars in header
+            const avatarContainer = document.getElementById('active-agents');
+            agentOrder.forEach(key => {
+                const agent = agents[key];
+                const div = document.createElement('div');
+                div.className = `w-8 h-8 rounded-full ${agent.color} border-2 border-white flex items-center justify-center`;
+                div.innerHTML = `<span class="material-symbols-outlined text-white text-[14px]">${agent.icon}</span>`;
+                avatarContainer.appendChild(div);
+            });
+
+            // Check if already authorized
+            const currentPath = await window.electron.ipcRenderer.invoke('get-workspace-path');
+            if (currentPath) {
+                document.getElementById('workspace-gate').classList.add('hidden');
+                document.getElementById('chat-container').classList.remove('hidden');
+                startAutonomousLoop();
+            }
+        };
+    </script>
+</body>
+</html>

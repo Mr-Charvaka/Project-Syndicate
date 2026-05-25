@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-background antialiased" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AutonomousAI - Agent Browser</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#464741",
+                        "primary-container": "#1d1d1b",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed": "#1a1c1b",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#1e1c1d",
+                        "on-tertiary-fixed-variant": "#494647",
+                        "surface-tint": "#5f5e5c",
+                        "background": "#fbf9f6",
+                        "surface-dim": "#dbdad7",
+                        "surface-bright": "#fbf9f6",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f2f0ee",
+                        "on-tertiary-container": "#888485",
+                        "on-secondary-container": "#616362",
+                        "surface-container": "#efeeeb",
+                        "on-background": "#1b1c1a",
+                        "on-primary-fixed-variant": "#474744",
+                        "inverse-surface": "#30312f",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#e2e2e1",
+                        "surface-container-high": "#e9e8e5",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#020202",
+                        "surface": "#fbf9f6",
+                        "tertiary-fixed": "#e7e1e2",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#c8c6c3",
+                        "outline": "#777771",
+                        "on-surface": "#1b1c1a",
+                        "primary-fixed": "#e5e2de",
+                        "secondary-container": "#e0e0de",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#454746",
+                        "on-primary-fixed": "#1c1c1a",
+                        "surface-container-low": "#f5f3f1",
+                        "primary-fixed-dim": "#c8c6c3",
+                        "surface-variant": "#e4e2e0",
+                        "on-tertiary-fixed": "#1d1b1c",
+                        "secondary": "#5d5f5d",
+                        "surface-container-highest": "#e4e2e0",
+                        "primary": "#020302",
+                        "tertiary-fixed-dim": "#cbc5c6",
+                        "outline-variant": "#c7c7bf",
+                        "on-primary-container": "#868582",
+                        "secondary-fixed-dim": "#c6c7c5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "sm": "8px",
+                        "xxl": "64px",
+                        "gutter": "24px",
+                        "md": "16px",
+                        "xl": "40px",
+                        "unit": "4px",
+                        "xs": "4px",
+                        "container-max": "1200px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Inter"],
+                        "h2": ["Inter"],
+                        "h1": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h3": ["22px", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "h2": ["30px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "h1": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }],
+                        "label": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="flex h-full font-body-md text-on-surface bg-background">
+
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-screen overflow-hidden bg-background">
+<!-- Header / Context Bar -->
+<header class="h-16 border-b border-[#E8E8E6] bg-surface-container-lowest flex items-center justify-between px-lg shrink-0">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary-container text-white flex items-center justify-center">
+<span class="material-symbols-outlined">smart_toy</span>
+</div>
+<div>
+<h1 class="font-h3 text-h3 text-on-surface">CTO-Agent</h1>
+<div class="flex items-center gap-sm mt-xs">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-label text-label text-outline">Participating: Web3 Hackathon</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<button class="flex items-center gap-xs px-md py-sm border border-[#E8E8E6] rounded-md text-on-surface hover:bg-surface-container-low transition-colors font-label text-label">
+<span class="material-symbols-outlined text-[18px]">pause</span>
+                    Pause Agent
+                </button>
+</div>
+</header>
+<!-- Browser Interface Wrapper -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Main Browser View -->
+<div class="flex-1 flex flex-col bg-surface border-r border-[#E8E8E6]">
+<!-- Browser Address Bar -->
+<div class="h-14 border-b border-[#E8E8E6] bg-surface-container-lowest flex items-center px-md gap-sm shrink-0">
+<div class="flex gap-xs text-outline">
+<button class="p-xs hover:bg-surface-container-low rounded-md transition-colors disabled:opacity-50"><span class="material-symbols-outlined">arrow_back</span></button>
+<button class="p-xs hover:bg-surface-container-low rounded-md transition-colors disabled:opacity-50"><span class="material-symbols-outlined">arrow_forward</span></button>
+<button class="p-xs hover:bg-surface-container-low rounded-md transition-colors"><span class="material-symbols-outlined">refresh</span></button>
+</div>
+<div class="flex-1 flex items-center bg-surface-container-low border border-[#E8E8E6] rounded-md px-md py-sm mx-sm">
+<span class="material-symbols-outlined text-[16px] text-outline mr-sm">lock</span>
+<input class="w-full bg-transparent border-none p-0 font-body-sm text-body-sm text-on-surface focus:ring-0 cursor-default" readonly="" type="text" value="https://ethglobal.com/events/hackathon-2024/projects"/>
+</div>
+<button class="p-sm text-outline hover:bg-surface-container-low rounded-md transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<!-- Simulated Webpage Content -->
+<div class="flex-1 overflow-auto p-lg bg-surface-container-lowest relative">
+<!-- Agent Interaction Overlay -->
+<div class="absolute top-1/3 left-1/4 w-8 h-8 rounded-full border-2 border-primary-container bg-primary-container/10 animate-pulse flex items-center justify-center pointer-events-none">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+</div>
+<div class="max-w-4xl mx-auto space-y-xl">
+<header class="border-b border-surface-variant pb-md">
+<h2 class="font-h1 text-h1 text-on-surface mb-sm">ETHGlobal Hackathon 2024</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Project Submissions &amp; Directory</p>
+</header>
+<!-- Bento Grid Layout for Hackathon Projects -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<!-- Project Card 1 (Focused by Agent) -->
+<div class="col-span-1 md:col-span-2 border border-primary-container rounded-lg p-lg bg-surface-container-lowest relative overflow-hidden group">
+<div class="absolute inset-0 border-2 border-primary-container/20 pointer-events-none"></div>
+<div class="flex justify-between items-start mb-md">
+<h3 class="font-h3 text-h3 text-on-surface">ZK-Rollup Analytics Dashboard</h3>
+<span class="bg-surface-container px-sm py-xs rounded-full font-label text-label text-on-surface-variant">DeFi</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-lg">
+                                    A comprehensive analytics suite for zero-knowledge rollups, providing real-time data on transaction throughput, gas savings, and proof verification times across multiple Layer 2 networks.
+                                </p>
+<div class="flex gap-sm">
+<span class="px-sm py-xs border border-surface-variant rounded-md font-label text-label text-outline">React</span>
+<span class="px-sm py-xs border border-surface-variant rounded-md font-label text-label text-outline">Ethers.js</span>
+<span class="px-sm py-xs border border-surface-variant rounded-md font-label text-label text-outline">The Graph</span>
+</div>
+</div>
+<!-- Project Card 2 -->
+<div class="col-span-1 border border-surface-variant rounded-lg p-lg bg-surface-container-lowest">
+<div class="flex justify-between items-start mb-md">
+<h3 class="font-body-lg text-body-lg font-medium text-on-surface">DAO Governance Aggregator</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">
+                                    Unified interface for managing voting power and proposals across multiple DAOs.
+                                </p>
+<div class="mt-auto flex flex-wrap gap-xs">
+<span class="px-xs py-xs bg-surface-container rounded font-label text-[10px] text-outline">Solidity</span>
+<span class="px-xs py-xs bg-surface-container rounded font-label text-[10px] text-outline">Next.js</span>
+</div>
+</div>
+<!-- Project Card 3 -->
+<div class="col-span-1 border border-surface-variant rounded-lg p-lg bg-surface-container-lowest">
+<div class="flex justify-between items-start mb-md">
+<h3 class="font-body-lg text-body-lg font-medium text-on-surface">NFT Fractionalization Protocol</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">
+                                    Smart contracts for trustless fractional ownership of high-value NFTs.
+                                </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Agent Thinking Process Sidebar -->
+<div class="w-96 bg-surface-container-lowest flex flex-col shrink-0">
+<div class="h-14 border-b border-[#E8E8E6] flex items-center px-md justify-between bg-surface-container-lowest shrink-0">
+<h2 class="font-label text-label text-on-surface uppercase tracking-widest flex items-center gap-sm">
+<span class="material-symbols-outlined text-[18px]">psychology</span>
+                        Thinking Process
+                    </h2>
+<span class="flex h-2 w-2 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary-container"></span>
+</span>
+</div>
+<div class="flex-1 overflow-y-auto p-md space-y-lg relative">
+<!-- Vertical Timeline Line -->
+<div class="absolute left-[27px] top-md bottom-md w-[1px] bg-[#E8E8E6]"></div>
+<!-- Log Item 1: Complete -->
+<div class="relative pl-xl">
+<div class="absolute left-1 top-1 w-6 h-6 rounded-full bg-surface-container flex items-center justify-center border border-[#E8E8E6] z-10">
+<span class="material-symbols-outlined text-[14px] text-outline">check</span>
+</div>
+<div class="font-label text-label text-outline mb-xs">10:42 AM</div>
+<div class="font-body-sm text-body-sm text-on-surface mb-xs font-medium">Navigated to Hackathon Directory</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-sm">Accessed main projects page to scan for potential integration partners.</p>
+</div>
+<!-- Log Item 2: Complete -->
+<div class="relative pl-xl">
+<div class="absolute left-1 top-1 w-6 h-6 rounded-full bg-surface-container flex items-center justify-center border border-[#E8E8E6] z-10">
+<span class="material-symbols-outlined text-[14px] text-outline">check</span>
+</div>
+<div class="font-label text-label text-outline mb-xs">10:43 AM</div>
+<div class="font-body-sm text-body-sm text-on-surface mb-xs font-medium">DOM Analysis Complete</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-sm">Extracted 45 project listings. Filtering for "DeFi" and "Analytics" tags.</p>
+</div>
+<!-- Log Item 3: Active -->
+<div class="relative pl-xl">
+<div class="absolute left-1 top-1 w-6 h-6 rounded-full bg-primary-container flex items-center justify-center border-2 border-white z-10 shadow-[0_0_0_2px_#1d1d1b]">
+<span class="material-symbols-outlined text-[14px] text-white">memory</span>
+</div>
+<div class="font-label text-label text-primary-container mb-xs">10:45 AM • Analyzing</div>
+<div class="font-body-sm text-body-sm text-on-surface mb-xs font-medium">Evaluating ZK-Rollup Analytics</div>
+<!-- Internal Monologue Card -->
+<div class="mt-sm p-sm bg-surface-container-low border border-[#E8E8E6] rounded-md relative">
+<p class="font-body-sm text-body-sm text-on-surface-variant italic">
+                                "This project aligns with our current tech stack requirement. The use of The Graph indicates solid indexing architecture. I will now examine their GitHub repository to assess code quality and check for recent commits before recommending collaboration."
+                            </p>
+</div>
+</div>
+<!-- Log Item 4: Pending -->
+<div class="relative pl-xl opacity-50">
+<div class="absolute left-1 top-1 w-6 h-6 rounded-full bg-surface flex items-center justify-center border border-[#E8E8E6] z-10">
+<span class="material-symbols-outlined text-[14px] text-outline">more_horiz</span>
+</div>
+<div class="font-label text-label text-outline mb-xs">Pending</div>
+<div class="font-body-sm text-body-sm text-outline">Locate Repository Link</div>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="p-md border-t border-[#E8E8E6] bg-surface-container-lowest">
+<button class="w-full py-sm border border-[#E8E8E6] rounded-md font-label text-label text-on-surface hover:bg-surface-container-low transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">terminal</span>
+                        View Raw Terminal Logs
+                    </button>
+</div>
+</div>
+</div>
+</main>
+</body></html>
